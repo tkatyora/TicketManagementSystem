@@ -1,0 +1,76 @@
+{% extends 'other.html' %}
+ {%block content%} 
+ {%load static%}
+ {% load crispy_forms_tags %}
+{% block title%}
+<head>
+  <meta name="Key Words" content="Web Development, Free Blog Hosting,Static Websites,Web Application" />
+  <meta
+    name="description"
+    content="This page is creating new Detailed Discription of  services including service type and price aswell as functinality"
+  />
+    <title>SecureTicketingSolution| Generate Ticket</title>
+{%endblock title%}
+</head>
+ <br> 
+<form id="form-id" method="POST" enctype="multipart/form-data" class="shadow-lg sm-5 mx-5 mt-5"
+>
+{% csrf_token %}
+
+
+<div class="mt-5 text-center">
+  <br>
+  <h5 class="text-center"> Generating Ticket </h5>
+  <h6 class="text-center">For</h6>
+  <h5 class="fw-bold text-secondary">{{data.showName}}'s Show</h5>
+</div>
+{% for message in messages %}
+
+<div class=" ">
+{% if message.tags == 'success'%}
+<p class="alert alert-success">{{message}}</p>
+{% else%}
+<p class="alert alert-warning">{{message}}</p>
+{%endif%} 
+</div>
+{%endfor%}
+
+<div class=" text-start  mx-3">
+  <p class="lead mt-3">
+  <strong>{{form.customerName|as_crispy_field}}</strong> 
+  </p>
+
+  <p class="lead mt-3">
+  <strong>{{form.numberPeople|as_crispy_field}}</strong> 
+  </p>
+  <p class="lead mt-3">
+    <strong>{{form.money|as_crispy_field}}</strong> 
+    </p>
+   
+ 
+  <h3>More Show Infomation</h3>
+  <strong>{{form2.showName|as_crispy_field}}</strong> 
+  </p>
+
+  <strong>{{form2.showVenue|as_crispy_field}}</strong> 
+</p>
+
+<strong>{{form2.amount|as_crispy_field}}</strong> 
+</p>
+
+  <br />
+  </div>
+
+<div class="text-start mb-5">
+<button type="submit" class="btn btn-info ms-5 button ">
+Generate
+</button>
+<button type="submit" class="btn btn-info ms-5 button ">
+  <a class="text-decoration-none text-black" href="{% url 'dashboard'%}">Back</a>
+  </button>
+</div>
+<br>
+
+</form>
+
+{%endblock content%}

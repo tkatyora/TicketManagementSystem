@@ -1,0 +1,89 @@
+{% extends 'other.html' %}
+ {% block content%} 
+ {% load static%}
+   {% block title%}
+<head>
+  <meta name="Key Words" content="Dashboard">
+  <meta name="description" content="">
+<title>SecureTicketingSolution|The HUb</title>
+</head>
+{%endblock title%}
+
+<br />
+<br />
+{%if user.roles == 'admin'  and user.is_admin or user.is_superuser %}
+
+<div class="album py-5 bg-body-tertiary">
+
+  <div class="container">
+    <h3 class="text-center mb-3">All Shows in SecureTicketingSolution</h3>
+    <div class="d-inline-flex">
+      
+        <form method="GET" action="{% url 'search_users' %}" class="mb-5 mb-md-0">
+            <div class="btn-group me-2 text-end">
+              <input type="text" name="username" placeholder="Search User" class="btn btn-sm btn-outline-primary"></input>
+              <button type="submit" class="btn btn-sm btn-outline-primary">Search</button>
+            </div>
+          </form> 
+    </div>
+ 
+    {% for message in messages %}
+    {% if message.tags == 'success'%}
+    <div class=" alert alert-success">
+    <p class="">{{message}}</p>
+    </div>
+    {%endif%} 
+    {%endfor%} 
+  
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for data in show %}   
+      <div class="col">
+        <div class="card shadow-sm">
+            <img
+            src="{% static '../static/Images/how.jpg'%}"
+            class="img-fluid d-block w-100"
+            style="height: 200px;"
+            alt=""
+            />
+          <div class="card-body">
+            <h5 >Show for  {{data.showName}}</h5>  <hr>
+            <ul class="list-unstyled d-block ms-2 fw-bold">
+              <li class="mb-3 fw-bold">  <i class="text-primary fa-bounce fa-solid fa-location"></i> <span class="ms-5">{{data.showVenue}}, {{data.showCity}} </span>   </li>
+              <li class="mb-3">  <i class=" text-primary fa-solid fa-home"></i> <span class="ms-5">{{data.NewshowDate}}</span>   </li>
+              <li class="mb-3"> <i class="  text-primary fa-solid fa-home"></i> <span class="ms-5" >${{data.amount}}.00 </span> 
+              </li>
+              <li class="mb-3"> <i class="  text-primary fa-solid fa-home"></i> <span class="ms-5" >Tickets Sold {{data.numbertickets}} </span> 
+              </li>
+              <li class="mb-3"> <i class="  text-primary fa-solid fa-home"></i> <span class="ms-5" > Total Earning ${{data.TotalCost}}.00 </span> 
+              </li>
+              
+              
+             
+            </ul> 
+            <div class="d-flex justify-content-between align-items-center">
+             
+              <div class="btn-group">
+                <button type="button" class="btn text-secondary btn-sm btn-outline-info">
+                  <a class="text-decoration-none text-secondary" href="{% url 'delete_show' data.id%}">Delete</a> </button>
+                <button type="button" class="btn text-secondary btn-sm btn-outline-info">
+                  <a class="text-decoration-none text-secondary" href="{% url 'update_show' data.id%}">Update</a>
+                 </button>
+                 <button type="button" class="btn text-secondary btn-sm btn-outline-info">
+                  <a class="text-decoration-none text-secondary" href="{% url 'view_ticket' %}">Tickets</a>
+                 </button>
+              </div>
+              <small class="text-body-secondary">
+                 <a class="text-decoration-none text-primary" href="{% url 'generate_ticket' data.id%}">Generate Ticket</a></small>
+            </div>
+          </div>
+        </div>
+      </div>
+      {%endfor%}
+    </div>
+  
+  </div>
+</div>
+{%endif%}
+
+
+ {% endblock content%}

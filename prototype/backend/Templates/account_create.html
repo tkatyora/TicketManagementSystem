@@ -1,0 +1,56 @@
+{% include 'style.html'%}
+<br> <br> <br> <br>
+<style>
+
+    .fade-in {
+      animation: fadeIn 1s ease-in-out;
+    }
+  
+    @keyframes fadeIn {
+      from {
+        opacity: 0.2;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    .fade-in2 {
+      animation: fadeIn2 1s ease-in-out;
+    }
+  
+    @keyframes fadeIn2 {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+<div class="text-center fade-in2">
+   <p class="text-success">Weldone <i class="fas fa-thumbs-up fa-2x fa-bounce"></i> You are almost there!</p> 
+    <br> 
+    {% for message in messages %}
+                     
+    <div class="  mx-sm-3 ">
+      {% if message.tags == 'warning'%}
+      <p class="text-danger text-center">{{message}}</p>
+      {%else%}
+      <p class="text-success text-center">{{message}}</p>
+    </div>
+    {%endif%} 
+  {%endfor%}
+<br>
+<div class="text-center">
+    <button type="button" class="btn btn-outline-info ms-5 button ">
+        <a class="nav-link text-decoration-none p-0 text-muted" href="https://mail.google.com">
+          Go to email  </a>
+      </button>
+</div>
+<br> <br>
+<p class="fst-italic fw-bold text-center text-warning">  <span class="text-secondary">SecureTicketingSolution</span>  ~ Where shows are handled securely</p>
+ <br>
+</div>
+
+
+

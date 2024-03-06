@@ -1,0 +1,167 @@
+{% extends 'other.html' %}
+ {% block content%} 
+ {% load static%}
+   {% block title%}
+<head>
+  <meta name="Key Words" content="Dashboard">
+  <meta name="description" content="">
+<title>SecureTicketingSolution|The HUb</title>
+</head>
+{%endblock title%}
+
+<br />
+<br />
+
+<div class="album py-5 bg-body-tertiary">
+  <div class="container">
+    {% for message in messages %}
+    {% if message.tags == 'success'%}
+    <div class=" alert alert-success">
+    <p class="">{{message}}</p>
+    </div>
+    {%endif%} 
+    {%endfor%} 
+  
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="col">
+        <div class="card shadow-sm">
+        
+          <div class="card-body">
+            <h3>Welcome
+            </br>
+                {{user.first_name}} {{user.last_name}}</h3>
+          
+         <hr>
+  
+            <ul class="list-unstyled d-block">
+             
+          
+              
+              
+              <li class="mb-2"><a class=" text-decoration-none " href="{% url 'developed'%}">My Profile</a> </li>
+              <li class="mb-2"><a class=" text-decoration-none" href="{% url 'developed'%}">Change Password</a> </li>
+              </li>
+              <li class="mb-2"><a class=" text-decoration-none" href="{% url 'logout' %}">Log Out</a> </li>
+            </li>
+         
+            </ul> 
+           
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+              </div>
+              <small class="text-body-secondary"><span class="text-primary">STS</span> ({{user.roles}})</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      {%if user.roles == 'customer'  and user.is_customer or user.is_superuser %}
+      <div class="col">
+        <div class="card shadow-sm">
+          
+          <div class="card-body">
+            <h3 > My Shows</h3>  <hr>
+            <ul class="list-unstyled d-block">
+              <li class="mb-2"><a class=" text-decoration-none " href%="">Show My shows</a> </li>
+              <li class="mb-2"><a class=" text-decoration-none" href="{% url 'developed'%}">Book a ticket</a> </li>
+              <li class="mb-2"><a class="text-decoration-none"href="{% url 'developed'%}"> My Ticket</a>
+              </li>
+              <li class="mb-2"><a class="text-decoration-none"href="{% url 'developed'%}">All shows</a>
+              </li>
+             
+            </ul> 
+            <div class="d-flex justify-content-between align-items-center">
+             
+              <div class="btn-group">
+              </div>
+              <small class="text-body-secondary"></small>
+            </div>
+          </div>
+        </div>
+      </div>
+      {%endif%}
+      {%if user.roles == 'admin'  and user.is_admin or user.is_superuser %}
+      <div class="col">
+        <div class="card shadow-sm">
+          
+          <div class="card-body">
+            <h3 > Ticket and Show Management</h3>  <hr>
+            <ul class="list-unstyled d-block">
+              <li class="mb-2"><a class="text-decoration-none" href="{% url 'view_show'%}">Show All shows</a> </li>
+              <li class="mb-2"><a class=" text-decoration-none" href="{% url 'create_show'%}">Create  show</a> </li>
+              <li class="mb-2"><a class="text-decoration-none"href="{% url 'developed'%}"> Show All Ticket</a>
+              </li>
+             
+             
+            </ul> 
+            <div class="d-flex justify-content-between align-items-center">
+             
+              <div class="btn-group">
+              </div>
+              <small class="text-body-secondary"></small>
+            </div>
+          </div>
+        </div>
+      </div>
+      {%endif%}
+        
+  
+      {%if user.roles == 'admin' and user.is_admin or user.is_superuser%}        
+      <div class="col">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h3>
+              User Management
+            </h3> 
+              <hr>
+            <ul class="list-unstyled d-block">
+           
+              <li class="mb-2"><a class=" text-decoration-none " href="{% url 'users'%}">View All Users</a> </li>
+              </li>   
+              <li class="mb-2"><a class=" text-decoration-none " href="{% url 'users'%}">View All Security Guards</a> </li>
+            </li>  
+            <li class="mb-2"><a class=" text-decoration-none " href="{% url 'users'%}">View All Customers</a> </li>
+          </li>  
+
+            <div class="d-flex justify-content-between align-items-center">
+             
+               <div class="btn-group">
+              </div>
+              <small class="text-body-secondary"></small>
+            </div>
+          </div>
+        </div>
+      </div>
+      {%endif%}
+      <div class="col">
+        <div class="card shadow-sm">
+          
+          <div class="card-body">
+            <h3>InBox</h3> <hr>
+            <ul class="list-unstyled d-block">
+              {%if user.roles == 'admin' %} 
+              <li class="mb-2"><a class=" text-decoration-none" href="">My In Box</a> </li>
+            </li>
+             {%elif user.roles == 'customer'%}
+             <li class="mb-2"><a class=" text-decoration-none" href="">My In Box</a> </li>
+            </li>
+            {%elif user.roles == 'guard'%}
+            <li class="mb-2"><a class=" text-decoration-none" href="">My In Box</a> </li>
+          </li>
+            {%endif%}
+           
+            </ul> 
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+              
+              </div>
+              <small class="text-body-secondary">STS</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+ {% endblock content%}

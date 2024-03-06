@@ -1,0 +1,44 @@
+{% include 'style.html'%}
+<br> <br> <br> <br>
+<style>
+
+    .fade-in {
+      animation: fadeIn 1s ease-in-out;
+    }
+  
+    @keyframes fadeIn {
+      from {
+        opacity: 0.2;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    .fade-in2 {
+      animation: fadeIn2 1s ease-in-out;
+    }
+  
+    @keyframes fadeIn2 {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+<div class="text-center fade-in2">
+    
+    <br> <br> <br> <br> <br>
+<p>Sorry {{user.first_name}} {{user.last_name}} Something went wrong with your link <i class="fas text-danger fa-2x fa-exclamation-circle"></i></p>
+<br>
+<div class="text-center">
+    <button type="button" class="btn btn-outline-info ms-5 button ">
+        <a class="nav-link text-decoration-none p-0 text-muted" href="{% url 'home'%}">
+          Back to Home Page  </a>
+      </button>
+</div>
+
+</div>
+
+
