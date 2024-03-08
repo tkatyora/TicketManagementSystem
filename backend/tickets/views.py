@@ -54,8 +54,11 @@ def updateTicket(request,pk):
         serializer = TicketSerializer(ticket,data = request.data)
         if serializer.is_valid():
             serializer.save()
+            print('updated')
             return Response(serializer.data, status= status.HTTP_201_CREATED)
-        return Response(status= status.HTTP_400_BAD_REQUEST)
+        else:
+            print('not updated',serializer.errors,'errors')
+            return Response(status= status.HTTP_400_BAD_REQUEST)
     else:
         return Response(serializer.errors, status =status.HTTP_405_METHOD_NOT_ALLOWED)
 # 1.5 deleteTicket   

@@ -17,7 +17,7 @@
 
   <div class="container">
     <h3 class="text-center mb-3">All Shows in SecureTicketingSolution</h3>
-    <div class="d-inline-flex">
+    <!-- <div class="d-inline-flex">
       
         <form method="GET" action="{% url 'search_users' %}" class="mb-5 mb-md-0">
             <div class="btn-group me-2 text-end">
@@ -25,7 +25,7 @@
               <button type="submit" class="btn btn-sm btn-outline-primary">Search</button>
             </div>
           </form> 
-    </div>
+    </div> -->
  
     {% for message in messages %}
     {% if message.tags == 'success'%}
@@ -49,12 +49,12 @@
             <h5 >Show for  {{data.showName}}</h5>  <hr>
             <ul class="list-unstyled d-block ms-2 fw-bold">
               <li class="mb-3 fw-bold">  <i class="text-primary fa-bounce fa-solid fa-location"></i> <span class="ms-5">{{data.showVenue}}, {{data.showCity}} </span>   </li>
-              <li class="mb-3">  <i class=" text-primary fa-solid fa-home"></i> <span class="ms-5">{{data.NewshowDate}}</span>   </li>
-              <li class="mb-3"> <i class="  text-primary fa-solid fa-home"></i> <span class="ms-5" >${{data.amount}}.00 </span> 
+              <li class="mb-3">  <i class=" text-primary fas fa-calendar"></i> <span class="ms-5">{{data.NewshowDate}}</span>   </li>
+              <li class="mb-3"> <i class="  text-primary fas fa-dollar-sign"></i> <span class="ms-5" >${{data.amount}}.00 </span> 
               </li>
-              <li class="mb-3"> <i class="  text-primary fa-solid fa-home"></i> <span class="ms-5" >Tickets Sold {{data.numbertickets}} </span> 
+              <li class="mb-3"> <i class="  text-primary fas fa-ticket-alt"></i> <span class="ms-5" >Tickets Sold {{data.numbertickets}} </span> 
               </li>
-              <li class="mb-3"> <i class="  text-primary fa-solid fa-home"></i> <span class="ms-5" > Total Earning ${{data.TotalCost}}.00 </span> 
+              <li class="mb-3"> <i class="  text-primary fas fa-chart-line"></i> <span class="ms-5" > Total Earning ${{data.TotalCost}}.00 </span> 
               </li>
               
               

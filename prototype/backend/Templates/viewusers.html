@@ -41,20 +41,37 @@
         <div class="card shadow-sm">
           
           <div class="card-body">
-            <h5 >Username ~ {{data.username}}</h5>  <hr>
+            <h5 ><i class="fas fa-user text-primary"></i><span class="ms-3" >Username    <span class="ms-3" >{{data.username}}</span>  </span></h5>  <hr>
             <ul class="list-unstyled d-block fw-bold">
-              <li class="mb-2 fw-bold">First Name ~  {{data.first_name.title}} </li>
-              <li class="mb-2">Last Name ~  {{data.last_name.title}}  </li>
-              <li class="mb-2">Phone Number ~  {{data.phoneNumber}} 
+              <li class="mb-3"> <i class="fas fa-user text-primary"></i><span class="ms-3" > {{data.first_name.title}}  </span> <span class="ms-1" >{{data.last_name.title}} </span> ({{data.roles.title}})
               </li>
-              <li class="mb-2">National Id ~  {{data.nationalId}} 
+              <li class="mb-3"> <i class="fas fa-phone text-primary"></i><span class="ms-3" >   {{data.phoneNumber}}  </span> 
               </li>
+              <li class="mb-3"> <i class="fas fa-id-card text-primary"></i><span class="ms-3" >  {{data.nationalId}}  </span> 
+              </li>
+              <li class="mb-3">
+              <i class=" fas fa-envelope text-primary"></i><span class="ms-3" > 
+                {% if data.email == ''%}
+                User has no email
+                {%else%}
+                  {{data.email}}  
+                {%endif%}
+                </span> </li>
+                <li class="mb-3"> <i class="fas fa-city text-primary"></i><span class="ms-3" >  {{data.city}}  </span> 
+                </li>
+                <li class="mb-3"> <i class="fas text-primary fa-sign-in-alt"></i>
+                  <span class="ms-3" >  {{data.last_login}}  </span> 
+                </li>
+               
+
              
             </ul> 
             <div class="d-flex justify-content-between align-items-center">
              
               <div class="btn-group">
-                <button type="button" class="btn text-secondary btn-sm btn-outline-info">Delete user</button>
+                <button type="button" class="btn text-secondary btn-sm btn-outline-info">
+                  <a class="text-decoration-none text-secondary" href="{% url 'delete_user' data.id%}">Delete user</a> </button>
+                </button>
                 <button type="button" class="btn text-secondary btn-sm btn-outline-info"><a class="text-decoration-none text-secondary" href="{% url 'change_role' data.id%}">Change role</a> </button>
               </div>
               <small class="text-body-secondary">{{data.roles}}</small>

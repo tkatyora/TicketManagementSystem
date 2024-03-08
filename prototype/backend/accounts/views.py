@@ -101,6 +101,7 @@ def Regester(request):
                 user.accountNumber = accountNum
                 user.save()
                 print('user saved')
+                messages.success(request,'Account Created Succefully')
                 return redirect('sign_in')
             else:
                 user.is_active = False
@@ -244,3 +245,19 @@ def changeRole(request,pk):
         
     }
     return render(request,  'changerole.html', content)
+
+@login_required(login_url='sign_in') 
+def deleteUser(request, pk):
+    user_to_delete = User.objects.get(id=pk)
+    print('show to delete',user_to_delete)
+    if request.method == 'POST':
+        user_to_delete.delete()
+        print('show deleted success')
+        messages.success(request, 'User Succesfully Deleted')
+        return redirect('users')
+    content = {}
+    content = {
+        'user': user_to_delete
+        
+    }
+    return render(request, 'delete_user.html', content)

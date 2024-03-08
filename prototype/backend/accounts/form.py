@@ -13,7 +13,7 @@ min_date = (today_date + datetime.timedelta(days=1 * 7))
 #MODULES FORMS
 class CreateUserForm(UserCreationForm):
     
-    email = forms.EmailField(required=False , label='Enter  Email address',
+    email = forms.EmailField(required=False , label='Enter  Email address(optional)',
                               widget=forms.EmailInput(
                                   attrs={
                                       'class':'form-control input',

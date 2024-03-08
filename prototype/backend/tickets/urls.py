@@ -10,6 +10,8 @@ urlpatterns = [
     path('update-show/<int:pk>', views.updateShow,name ='update_show'),
     path('create-ticket/<int:pk>', views.createTicket,name ='generate_ticket'),
     path('view-ticket',views.viewTicket, name ='view_ticket'),
+    path('print-ticket/<int:ticket_id>', views.printTicket,name ='print_ticket'),
+
   
 ]
 

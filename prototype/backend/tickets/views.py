@@ -3,6 +3,13 @@ from django.contrib.auth.decorators import login_required ,permission_required
 from accounts.decorators import unauthenticated_user
 from django.contrib import messages
 from accounts.form import *
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+from reportlab.pdfgen import canvas
+from io import BytesIO
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.utils import ImageReader
+from xhtml2pdf import pisa
 # Create your views here.
 
 #VARIABLES
@@ -36,6 +43,7 @@ def developed(request):
 def createShow(request):
         if request.method == 'POST':
             form =ShowForm(request.POST)
+            img2 = request.POST.get('img',None)
             print('inside show form')
             if form.is_valid():
                 print('form is valid')
@@ -44,11 +52,12 @@ def createShow(request):
                 show.created_by = request.user
                 show.numbertickets = 0
                 print(img)
+                print(img2)
                 show.save()
                 print('show created succesfully')
                 mesage= f'Show Created  succesfully'
                 messages.success(request,mesage)
-                return redirect('create_show')   
+                return redirect('view_show')   
             else:
                 print('form not valid',form.erros)
                 messages.warning(request, 'Sorry Product Creation failled!')
@@ -151,7 +160,7 @@ def createTicket(request,pk):
                         info = f'cashPad {cashPaid} , number of people{users}'
                         mesage= f'Ticket Generate Succesfully succesfully.Change is ${change}.00'
                         messages.success(request,mesage)
-                        return redirect('view_show')        
+                        return redirect('view_ticket')        
                     else:
                         print('show form error',showform.errors)
                 elif money < cashPaid:
@@ -187,4 +196,28 @@ def viewTicket(request):
         'tickets': tickets
         
     }
-    return render(request , 'view_tickets_user.html',content)
+    return render(request , 'view_tickets.html',content)
+
+
+#printing ticket 
+
+@login_required(login_url='sign_in')
+def printTicket(request,ticket_id):
+    ticket = Ticket.objects.get(pk=ticket_id)
+    print(ticket.customerName)
+    html_content = render_to_string('print_ticket.html', {'data': ticket})
+    print(html_content)
+    # Generate PDF from HTML content
+    pdf_file = BytesIO()
+    print(pdf_file)
+    pisa.CreatePDF(html_content, dest=pdf_file)
+    print(pisa.CreatePDF(html_content, dest=pdf_file))
+    # p = canvas.Canvas(pdf_file, pagesize=letter)
+    # p.drawString(100, 800, "Ticket Information")
+    # p.drawHTML(html_content, (100, 780), forceWidth=400)  # Draw HTML content on PDF canvas
+    # p.save()
+    
+    response = HttpResponse(pdf_file.getvalue(), content_type='application/pdf')
+    print(response)
+    response['Content-Disposition'] = 'attachment; filename="Ticket.pdf"'
+    return response

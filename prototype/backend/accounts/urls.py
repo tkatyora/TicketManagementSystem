@@ -10,6 +10,7 @@ urlpatterns = [
     path('users',views.Allusers , name ='users'),  
     path('search/', views.search_users, name='search_users'),
     path('change-role/<int:pk>', views.changeRole,name ='change_role'),
+    path('delete-user/<int:pk>', views.deleteUser,name ='delete_user'),
 
 ]
 

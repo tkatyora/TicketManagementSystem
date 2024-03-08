@@ -13,8 +13,9 @@
 {%endblock title%}
 </head>
  <br> 
-<form id="form-id" method="POST" enctype="multipart/form-data" class="shadow-lg sm-5 mx-5 mt-5"
->
+
+<form id="form-id" method="POST" enctype="multipart/form-data" class="shadow-lg sm-5 mx-5 mt-5">
+
 {% csrf_token %}
 
 
@@ -50,6 +51,7 @@
   <p class="lead mt-3">
   <strong>{{form.amount|as_crispy_field}}</strong> 
   </p>
+  
   <p class="lead mt-3">
     <strong>{{form.picture|as_crispy_field}}</strong> 
     </p>

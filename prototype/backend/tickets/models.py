@@ -116,11 +116,20 @@ class Ticket(models.Model):
 
 
         def save(self,*args , **kwargs):
-                qrcode_img = qrcode.make()
+                qr_data = f"Ticket Status: {self.ticketStatus}\n"
+                qr_data += f"Show Status: {self.showStatus}\n"
+                qr_data += f"Customer Name: {self.customerName}\n"
+                qr_data += f"Show Name: {self.show}\n"
+                # qr_data += f"Show Venue: {self.show.showVenue}\n"
+                # qr_data += f"Show City: {self.show.showCity}\n"
+                # qr_data += f"Show Date: {self.show.showDate}\n"
+
+                # Generate QR code image
+                qrcode_img = qrcode.make(qr_data)
                 canvas = Image.new('RGB',(200,200), 'white')
                 draw = ImageDraw.Draw(canvas)
                 canvas.paste(qrcode_img)
-                fname = f'QR_CODE for{self.customerName}, for{self.show.showName}.png Show'
+                fname = f'QR_CODE for{self.customerName}, for{self.show}.png Show'
                 buffer = BytesIO()
                 canvas.save(buffer,'PNG')
                 self.qr_code.save(fname,File(buffer),save= False)

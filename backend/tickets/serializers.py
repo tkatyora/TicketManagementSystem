@@ -3,6 +3,6 @@ from .models import *
 
 class TicketSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Ticket()
+        model = Ticket
         fields = '__all__'
        
