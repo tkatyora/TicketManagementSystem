@@ -1,5 +1,5 @@
 from django.db import models
-from accounts.models import User
+from accounts.models import StsUser
 import qrcode
 from PIL import Image ,ImageDraw
 from io import BytesIO
@@ -27,7 +27,7 @@ class Ticket(models.Model):
         showVenue= models.CharField(max_length=255,null=True ,blank= True) 
         showCity = models.CharField(max_length=100,null=True,default='Not Selected' ,choices=CITY_CHOICES)
         showDate = models.DateTimeField( auto_now=False, auto_now_add=False ,null=True)
-        created_by = models.ForeignKey(User,  on_delete=models.CASCADE ,null=True,blank=True)
+        created_by = models.ForeignKey(StsUser,  on_delete=models.CASCADE ,null=True,blank=True)
         created_on=models.DateTimeField( auto_now=False, auto_now_add=True ,null=True)
         updated_on=models.DateTimeField( auto_now=True, auto_now_add=False ,null=True)
         qr_code = models.ImageField(upload_to ='Pictures', blank=True ,null= True) 

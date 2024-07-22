@@ -1,0 +1,4 @@
+POST http://localhost:8000/auth_api/logout/ HTTP/1.1
+content-type: application/json
+Authorization: e9eedc026cb6f92844a7aa357ec8f7f7a65e0e20
+

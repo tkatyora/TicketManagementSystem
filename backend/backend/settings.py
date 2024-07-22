@@ -24,9 +24,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-li=6-o@bg(!&e1vp-wgtbt7$dgg@b-ss*ecd^k((j_$pla1y%q"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+production = False
+
+if production:
+    DEBUG = False
+    ALLOWED_HOSTS = ['apists.murimiwanku.co.zw']
+else:
+    DEBUG = True
+    ALLOWED_HOSTS = []
+
 
 
 # Application definition
@@ -42,6 +49,9 @@ INSTALLED_APPS = [
     'accounts',
     'rest_framework',
     "corsheaders",
+    "rest_framework.authtoken",
+    "shows"
+
 ]
 
 MIDDLEWARE = [
@@ -80,13 +90,26 @@ WSGI_APPLICATION = "backend.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+local = True
 
+if local:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'gnpcozw_sts_test',
+            'USER': 'gnpcozw_sts_test',
+            'PASSWORD': 'sts_test2000',
+            'HOST': '198.251.89.205',
+            'PORT': '3306',  
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -131,13 +154,54 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
+#EXTRA BACKEND SETTING AND CONFIGURATIONS
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CORS_ALLOW_ALL_ORIGINS = True
+PHONENUMBER_DEFAULT_REGION = 'ZW'
+AUTH_USER_MODEL = "accounts.StSUser"
+AUTHENTICATION_BACKENDS = [
+    'accounts.authentication.EmailOrUsernameBackend',  
+    # 'django.contrib.auth.backends.ModelBackend',
+]
 
-# CORS_ALLOWED_ORIGINS = [
-#     "https://example.com",
-#     "https://sub.example.com",
-#     "http://localhost:8080",
-#     "http://127.0.0.1:9000",
-# ]
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        
+    ],
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
+    
+}
+SIMPLE_JWT = {
+   'AUTH_HEADER_TYPES': ('JWT',),
+}
+
+SIMPLE_JWT = {
+    "AUTH_HEADER_TYPES": ("Bearer",),
+}
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+  
+    "http://localhost:3000",
+ 
+]
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'info.sts@gmail.com'
+# EMAIL_HOST_PASSWORD = 'cgfjtdohylhgromi'
+EMAIL_HOST_USER = 'info.murimiwangu@gmail.com'
+EMAIL_HOST_PASSWORD = 'ytrf ouzu zcmi iazn'
+EMAIL_USE_TLS= True
+EMAIL_USE_SSL = False
