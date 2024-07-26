@@ -1,7 +1,6 @@
 from django.urls import path
-from .views  import TicketList , TicketDetail
+from .views  import createTicket
 
 urlpatterns = [
-    path('tickets/', TicketList.as_view() ),
-    path('tickets/<int:pk>/', TicketDetail.as_view()),
+    path('create/', createTicket, name='create-ticket')
 ]

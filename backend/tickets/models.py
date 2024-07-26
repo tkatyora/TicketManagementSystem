@@ -4,34 +4,18 @@ import qrcode
 from PIL import Image ,ImageDraw
 from io import BytesIO
 from django.core.files import File
+from shows.models import Show
 
 
 
 class Ticket(models.Model): 
-        CITY_CHOICES = [
-        ('Harare', 'Harare'),
-        ('Bulawayo', 'Bulawayo'),
-        ('Gweru', 'Gweru'),
-        ('Chitungwiza', 'Chitungwiza'),
-        ('Mutare', 'Mutare'),
-        ('Kwekwe', 'Kwekwe'),
-        ('Kadoma', 'Kadoma'),
-        ('Masvingo', 'Masvingo'),
-        ('Norton', 'Norton'),
-        ('Chinhoyi', 'Chinhoyi'),
-
-        ]  
-        # infomation of the show  
-        showName  = models.CharField(null=True,blank=False,max_length=255)
+        show_detailts = models.ForeignKey(Show,on_delete=models.CASCADE,null=True)
         customerName = models.CharField(null=True,blank=False,max_length=255)
-        showVenue= models.CharField(max_length=255,null=True ,blank= True) 
-        showCity = models.CharField(max_length=100,null=True,default='Not Selected' ,choices=CITY_CHOICES)
-        showDate = models.DateTimeField( auto_now=False, auto_now_add=False ,null=True)
         created_by = models.ForeignKey(StsUser,  on_delete=models.CASCADE ,null=True,blank=True)
-        created_on=models.DateTimeField( auto_now=False, auto_now_add=True ,null=True)
-        updated_on=models.DateTimeField( auto_now=True, auto_now_add=False ,null=True)
+        created_on = models.DateTimeField( auto_now=False, auto_now_add=True ,null=True)
+        updated_on = models.DateTimeField( auto_now=True, auto_now_add=False ,null=True)
         qr_code = models.ImageField(upload_to ='Pictures', blank=True ,null= True) 
-        amountPaid = models.IntegerField(null= True)
+        amountPaid = models.DecimalField(null= True,decimal_places=2,max_digits=255)
         numberPeople= models.IntegerField(null= True)
        
         
