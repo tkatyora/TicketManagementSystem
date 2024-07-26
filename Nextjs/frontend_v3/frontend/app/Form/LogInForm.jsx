@@ -27,12 +27,12 @@ const LogInForm = () => {
           if (data.account_type === 'bussiness') {
             setTimeout(() => {
               router.push('/dashboard/bussiness');
-            }, 500);
+            }, 10);
              
           } else {
             setTimeout(() => {
               router.push('/dashboard/personal');
-            }, 500);
+            }, 10);
 
              
           }

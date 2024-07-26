@@ -1,10 +1,9 @@
 "use client"
 import { useEffect , useState } from 'react';
 import { createProduct } from '../ApiServices/showApi';
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
-const AddProduct = () => {
+const AddShows = () => {
   const [formData, setFormData] = useState({
     picture: null,
     showName: '',
@@ -57,7 +56,8 @@ const AddProduct = () => {
     try {
       const response = await createProduct(formDataToSend);
       console.log(response);
-      router.push('/shows');
+      router.push('/portal/shows?message=showAdded');
+      
     } catch (error) {
       if (error.response) {
         console.error("Error response data:", error.response.data);
@@ -190,4 +190,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default AddShows;

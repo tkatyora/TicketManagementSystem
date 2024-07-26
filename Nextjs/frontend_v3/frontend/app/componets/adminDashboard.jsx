@@ -13,6 +13,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 const AdminDashboard = ({ user }) => {
     const [open, setOpen] = useState(false);
+    
 
     const doughnutData = {
         labels: ['Red', 'Blue', 'Yellow'],
@@ -59,13 +60,19 @@ const AdminDashboard = ({ user }) => {
 <div className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg hover:bg-gray-200 hover:text-gray-700">
 <ShoppingCartIcon className="w-6 h-6" />
 <span className="mx-4">
-<Link href="/shows">Shows</Link>
+<Link href="/portal/shows">Shows</Link>
+</span>
+</div>
+<div className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg hover:bg-gray-200 hover:text-gray-700">
+<ShoppingCartIcon className="w-6 h-6" />
+<span className="mx-4">
+<Link href="/shows">Tickets History</Link>
 </span>
 </div>
 <div className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg hover:bg-gray-200 hover:text-gray-700">
 <CameraIcon className="w-6 h-6" />
 <span className="mx-4">
-<Link href="/shows">Scan Tickets</Link>
+<Link href="/portal/shows">Scan Tickets</Link>
 </span>
 </div>
 <div className="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-lg hover:bg-gray-200 hover:text-gray-700">
